@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import AnimationData from "../assets/lets-chat.json";
 
-import { io } from "socket.io-client";
+import io from "socket.io-client";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
@@ -37,13 +37,13 @@ const defaultAnimtion = {
   animationData: AnimationData,
 };
 
+const socket = io("http://localhost:8000");
+
 const FormLogin: React.FC = () => {
   const classes = useStyles();
   const [name, setName] = useState<string>("");
   const [room, setRoom] = useState<string>("");
   const [isRigis, setIsRigis] = useState<boolean>(true);
-
-  const socket = io("http://localhost:8000/");
 
   const connectToRoom = () => {
     socket.emit("join_room", room);
